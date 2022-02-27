@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Rocky.Models.Category>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<p> 
+    <a class="btn btn-primary" asp-action="Create"> <i class="fa-solid fa-circle-plus"></i> &ensp; Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisplayOrder)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayOrder)
+            </td>
+            <td>
+
+                <a asp-action="Edit" asp-route-id="@item.ID"><i class="fa-solid fa-pen-to-square"></i> Edit</a> |
+
+
+                @*<a asp-action="Details" asp-route-id="@item.ID"><i class="fas fa-align-justify"></i> &ensp; Details</a> |*@
+
+
+                <a asp-action="Delete" asp-route-id="@item.ID"> <i class="fas fa-trash"></i>&ensp; Delete</a>
+
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

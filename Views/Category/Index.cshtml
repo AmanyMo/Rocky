@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Rocky.Models.Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a class="btn-link" asp-action="Details"><i class="fas fa-align-justify"></i>&ensp; Details</a>
+
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>@Html.DisplayNameFor(n=>n.Name)</th>
+            <th>Display order</th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(i => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.DisplayOrder)
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
