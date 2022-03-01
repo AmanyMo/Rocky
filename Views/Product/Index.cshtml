@@ -1,7 +1,62 @@
 ﻿
+@model IEnumerable<Rocky.Models.Product>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container pt-2">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Product List</h2>
+        </div>
+        <div class="col-6">
+            <div class="col-6">
+                <a class="btn btn-primary" asp-action="Upsert"> <i class="fa-solid fa-circle-plus"></i> &ensp; Add New Product</a>
+            </div>
+        </div>
 
+</div>
+
+
+@if (Model.Count() > 0)
+{
+
+    <table class=" table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@i.Name</td>
+                    <td>@i.Price</td>
+                    <td>
+
+                        <a asp-action="Upsert" asp-route-id="@i.ID"><i class="fa-solid fa-pen-to-square"></i> Edit</a> |
+
+
+                        @*<a asp-action="Details" asp-route-id="@item.ID"><i class="fas fa-align-justify"></i> &ensp; Details</a> |*@
+
+
+                        <a asp-action="Delete" asp-route-id="@i.ID"> <i class="fas fa-trash"></i>&ensp; Delete</a>
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+}
+else
+{
+    <h1>No product Items</h1>
+}
