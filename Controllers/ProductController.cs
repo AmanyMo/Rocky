@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Rocky.Data;
 using Rocky.Models;
+
+using Rocky.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Rocky.Controllers
@@ -32,23 +34,36 @@ namespace Rocky.Controllers
         //get create & update
         public IActionResult Upsert(int? id)
         {
-            Product product = new Product();
-            IEnumerable<SelectListItem> listItems = _db.Category.Select(a => new SelectListItem()
+            // using View bag so the view is not strongly typed view so should use model
+
+            //Product product = new Product();
+            //IEnumerable<SelectListItem> listItems = _db.Category.Select(a => new SelectListItem()
+            //{
+            //    Text = a.Name,
+            //    Value = a.ID.ToString()
+            //});
+            //ViewBag.listitems = listItems;
+
+            //use model view to be strongly typed view
+            ProductVM productvm = new ProductVM()
             {
-                Text = a.Name,
-                Value = a.ID.ToString()
-            });
-            ViewBag.listitems = listItems;
+                product = new Product(),
+                ListItems = _db.Category.Select(a => new SelectListItem()
+                {
+                    Text=a.Name,
+                    Value=a.ID.ToString()
+                })
+            };
             //create so there is no id
             if (id==null)
             {
-                return View(product);
+                return View(productvm);
             }
             else
             {
                 //it's an edit and there is an id
-                 product = _db.Product.Find(id);
-                 return View(product);
+                 productvm.product = _db.Product.Find(id);
+                 return View(productvm);
 
             }
 
