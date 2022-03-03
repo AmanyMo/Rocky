@@ -66,7 +66,7 @@
                         <label asp-for="product.Image" class="control-label"></label>
                     </div>
                     <div class="col-8">
-                        <input type="file" name="files" id="uploadbox" multiple class="form-control"  />
+                        <input type="file" name="files" id="uploadbox" multiple class="form-control" />
                         <span asp-validation-for="product.Image" class="text-danger"></span>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                             }
                             else
                             {
-                                <input type="submit" value="Create" class="btn btn-primary" />
+                                <input type="submit" value="Create" onclick="return confirmImg()" class="btn btn-primary" />
                             }
                         </div>
                         <div class="col">
@@ -107,16 +107,17 @@
             <div class="col-4">
                 <div class="col-3 p-4">
                     @* to show image during edit *@
-                    @if (Model.product.ID == 0 || Model.product.Image==null) //create
+                    @if (Model.product.ID == 0 || Model.product.Image == null) //create
                     {
 
                     }
-                    else { 
-                        <img src="@WebConstant.ImgPath@Model.product.Image" width="200" height="200"  style="border-radius:5px; border:1px solid #4cff00"/>
-                        }
+                    else
+                    {
+                        <img src="@WebConstant.ImgPath@Model.product.Image" width="200" height="200" style="border-radius:5px; border:1px solid #4cff00" />
+                    }
 
                 </div>
-               
+
 
             </div>
         </div>
@@ -126,14 +127,34 @@
 
 
 
-   
+
 </form>
-@*<script>
-    $(document).ready(function () {
-        $('.summernote').summernote(
-            {
-                height:250
+
+@section Scripts{
+    <script>
+
+        function confirmImg() {
+            if (document.getElementById('uploadbox').value == "") {
+                 Swal.fire(
+                    'Error!',
+                    'please insert an image..',
+                    'error'
+                )
+                return false;
             }
-        );
-    });
-</script>*@
+            return true;
+        }
+       
+    </script>
+    
+}
+
+@*<script>
+        $(document).ready(function () {
+            $('.summernote').summernote(
+                {
+                    height:250
+                }
+            );
+        });
+    </script>*@
