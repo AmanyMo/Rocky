@@ -18,7 +18,7 @@ namespace Rocky.Models
 
         public string  Description { get; set; }
 
-
+        [DataType(DataType.Currency)]
         [Column(TypeName ="decimal(8,2)")]
         [Range(0,int.MaxValue)]
         public Decimal Price { get; set; }
